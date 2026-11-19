@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="智镜寻微 · EpiSeg Review 食管鳞癌病理影像辅助分割与人机协同复核工作台展示。">
+    <meta name="theme-color" content="#f6f5fb">
+    <title>智镜寻微 · EpiSeg Review</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./demo.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header frame">
+      <a class="brand" href="#top" aria-label="智镜寻微首页">
+        <span class="brand-mark" aria-hidden="true"><i></i></span>
+        <span>智镜寻微<small>EpiSeg Review</small></span>
+      </a>
+      <nav aria-label="页面导航">
+        <a href="#demo">交互演示</a>
+        <a href="#workflow">工作流程</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero frame" aria-labelledby="title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span>食管鳞癌 H&amp;E 病理影像</p>
+          <h1 id="title">智镜<span>寻微</span></h1>
+          <p class="hero-subtitle">病理影像辅助分割与复核工作台</p>
+          <p class="hero-description">模型生成像素级候选掩膜，复核人员对照原图检查并修订边界，保存版本后按批次导出。</p>
+          <a class="primary-link" href="#demo">体验分割复核</a>
+        </div>
+
+        <figure class="viewer" id="demo" aria-labelledby="demo-title">
+          <div class="viewer-header">
+            <h2 id="demo-title">显微视野演示</h2>
+            <span class="sample-label">合成示意</span>
+          </div>
+          <div class="image-stage">
+            <canvas id="specimen" width="960" height="600" role="img" aria-label="合成病理视野，显示模型分割的示意轮廓">合成病理视野与掩膜叠加演示。</canvas>
+            <span class="stage-label" id="stage-label" aria-hidden="true">模型分割</span>
+          </div>
+          <div class="viewer-controls">
+            <div class="view-switch" role="group" aria-label="选择影像视图">
+              <button type="button" data-view="source" aria-pressed="false">原图</button>
+              <button type="button" data-view="prediction" aria-pressed="true">模型分割</button>
+              <button type="button" data-view="revision" aria-pressed="false">人工修订</button>
+            </div>
+            <label class="opacity" for="opacity">叠加强度 <input id="opacity" type="range" min="0" max="100" value="55"><output id="opacity-value" for="opacity">55%</output></label>
+          </div>
+          <figcaption id="view-description" aria-live="polite">模型分割视图叠加候选轮廓，便于逐处核查边界。</figcaption>
+          <noscript><p class="script-note">交互演示需要启用 JavaScript。</p></noscript>
+        </figure>
+      </section>
+
+      <section class="workflow frame" id="workflow" aria-labelledby="workflow-title">
+        <div class="workflow-intro">
+          <h2 id="workflow-title">从影像到可追溯掩膜</h2>
+          <p>工作台将模型推理和人工复核串联在同一批次。</p>
+        </div>
+        <ol class="steps">
+          <li><h3>导入影像</h3><p>按批提交 JPG 或 PNG 病理视野，跟踪每张图的处理状态。</p></li>
+          <li><h3>生成候选掩膜</h3><p>GPU 批量推理，将二值掩膜叠回原图，逐图查看预测区域。</p></li>
+          <li><h3>复核与修订</h3><p>通过画笔和橡皮补画或擦除边界，保存修订并查看历史版本。</p></li>
+          <li><h3>导出结果</h3><p>批量下载当前有效掩膜及清单，核对原文件名、处理状态和修订版本。</p></li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="site-footer frame">
+      <span>智镜寻微 · EpiSeg Review</span>
+      <span>科研原型展示 · 演示合成视野与示意掩膜仅用于说明操作流程</span>
+    </footer>
+  </body>
+</html>
